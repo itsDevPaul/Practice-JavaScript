@@ -1,0 +1,54 @@
+<!-- This code creates a dynamic table of friends' names and their row numbers,
+and displays a message when a row is clicked,
+indicating the friend's name and the corresponding row number. -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Table of friends' names and their row numbers</title>
+    <style>
+      .box {
+        cursor: pointer;
+      }
+
+      .box:hover {
+        background-color:hsl(160, 100%, 75%);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="output"></div>
+    <p id="message"></p>
+
+    <script>
+      const output = document.querySelector("#output");
+      const message = document.querySelector("#message");
+      const friends = ["Paul", "Mike", "John", "Larry", "Kim"];
+      
+      build();
+
+      function build() {
+        let html = "<h1>My Friends Table</h1><table>";
+
+        friends.forEach((name, index) => {
+          html += `<tr class="box" data-row="${index + 1}" data-name="${name}" onclick="getData(this)">
+                     <td>${name}</td>
+                     <td >${index + 1}</td>
+                   </tr>`;
+        });
+
+        html += "</table>";
+        output.innerHTML = html;
+      }
+
+      function getData(element) {
+        let dataRow = element.getAttribute("data-row");
+        let dataName = element.getAttribute("data-name");
+        message.innerHTML = `${dataName} is in row #${dataRow}`;
+      }
+    </script>
+  </body>
+</html>
